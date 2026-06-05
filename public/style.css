@@ -1,0 +1,317 @@
+:root {
+    --bg-color: #f3f4f6;
+    --panel-bg: #ffffff;
+    --text-primary: #1f2937;
+    --text-secondary: #6b7280;
+    --accent-color: #3b82f6;
+    --accent-hover: #2563eb;
+    --border-color: #e5e7eb;
+    --success-color: #10b981;
+    --danger-color: #ef4444;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: 'Inter', sans-serif;
+    background-color: var(--bg-color);
+    color: var(--text-primary);
+    height: 100vh;
+    overflow: hidden;
+}
+
+/* Two-column Layout */
+.app-container {
+    display: flex;
+    height: 100vh;
+    width: 100vw;
+}
+
+.left-column {
+    width: 300px;
+    display: flex;
+    flex-direction: column;
+    border-right: 1px solid var(--border-color);
+    background-color: var(--panel-bg);
+}
+
+.right-column {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    background-color: var(--bg-color);
+    min-width: 0;
+}
+
+/* Typography & Headers */
+h2 {
+    font-size: 1.1rem;
+    font-weight: 600;
+}
+
+/* Left Hand Panel - Chapters */
+.chapters-container {
+    padding: 20px;
+    border-bottom: 1px solid var(--border-color);
+    background-color: #f8fafc;
+}
+
+.chapters-container h2 {
+    margin-bottom: 15px;
+    color: var(--text-primary);
+}
+
+.chapters-nav {
+    display: flex;
+    flex-direction: column; /* Chapter buttons in a column */
+    gap: 10px;
+}
+
+.chapter-btn {
+    background-color: transparent;
+    border: 1px solid var(--border-color);
+    border-radius: 6px;
+    padding: 10px 18px; 
+    font-size: 0.95rem; 
+    font-weight: 500;
+    color: var(--text-secondary);
+    cursor: pointer;
+    transition: all 0.2s ease;
+    text-align: left;
+}
+
+.chapter-btn:hover {
+    border-color: var(--accent-color);
+    color: var(--accent-color);
+}
+
+.chapter-btn.active {
+    background-color: var(--accent-color);
+    color: white;
+    border-color: var(--accent-color);
+}
+
+/* Left Hand Panel - Files */
+.files-container {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    overflow-y: auto;
+    position: relative;
+}
+
+.files-container.drag-over {
+    background-color: #eff6ff;
+}
+
+.files-container.drag-over::after {
+    content: 'Drag text with folder path here';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(255,255,255,0.8);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    color: var(--accent-color);
+    z-index: 10;
+}
+
+.panel-header {
+    padding: 15px 20px;
+    border-bottom: 1px solid var(--border-color);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: var(--panel-bg);
+    position: sticky;
+    top: 0;
+    z-index: 5;
+}
+
+.folder-display {
+    padding: 10px 20px;
+    font-size: 0.75rem;
+    color: var(--text-secondary);
+    border-bottom: 1px solid var(--border-color);
+    word-break: break-all;
+    background: #f9fafb;
+}
+
+.file-list {
+    list-style: none;
+    padding: 10px;
+}
+
+.file-item {
+    padding: 12px 15px;
+    border-radius: 8px;
+    cursor: pointer;
+    margin-bottom: 4px;
+    font-size: 0.95rem;
+    color: var(--text-primary);
+    transition: all 0.2s ease;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.file-item::before {
+    content: '📄';
+    font-size: 1.1rem;
+}
+
+.file-item:hover {
+    background-color: #f3f4f6;
+}
+
+.file-item.active {
+    background-color: #eff6ff;
+    color: var(--accent-color);
+    font-weight: 500;
+}
+
+/* Right Hand Panel - Bookmarks */
+.bookmarks-container {
+    background-color: var(--panel-bg);
+    border-bottom: 1px solid var(--border-color);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 15px 20px;
+    position: relative;
+    height: 70px;
+}
+
+.bookmark-controls {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.bookmark-label {
+    font-weight: 600;
+    font-size: 0.9rem;
+    color: var(--text-primary);
+}
+
+#current-chapter-label {
+    text-transform: capitalize;
+    color: var(--accent-color);
+}
+
+.bookmark-slot {
+    display: flex;
+    align-items: center;
+    background-color: var(--bg-color);
+    border-radius: 6px;
+    padding: 4px;
+    border: 1px solid var(--border-color);
+}
+
+.bookmark-slot label {
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: var(--text-secondary);
+    padding: 0 8px;
+}
+
+.bookmark-slot input {
+    width: 70px; 
+    border: 1px solid var(--border-color);
+    border-radius: 4px;
+    padding: 6px 8px; 
+    font-size: 1rem; 
+    outline: none;
+    text-align: center;
+}
+
+.bookmark-slot input:focus {
+    border-color: var(--accent-color);
+}
+
+.bookmark-slot button {
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 4px 6px;
+    font-size: 1.1rem;
+    color: var(--text-secondary);
+    transition: transform 0.1s ease;
+}
+
+.bookmark-slot button:hover {
+    transform: scale(1.15);
+}
+
+.bookmark-slot button:active {
+    transform: scale(0.95);
+}
+
+.status-message {
+    position: absolute;
+    right: 20px;
+    font-size: 0.85rem;
+    color: var(--success-color);
+    opacity: 0;
+    transition: opacity 0.3s;
+}
+
+/* Right Hand Panel - Viewer */
+.viewer-container-wrapper {
+    flex: 1;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+}
+
+.viewer-container {
+    flex: 1;
+    background-color: var(--panel-bg);
+    border-radius: 12px;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+    overflow: hidden;
+    position: relative;
+    border: 1px solid var(--border-color);
+}
+
+.empty-state {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: var(--text-secondary);
+    font-size: 1.1rem;
+    font-weight: 500;
+}
+
+iframe {
+    width: 100%;
+    height: 100%;
+    border: none;
+}
+
+/* Common Actions */
+.panel-actions {
+    display: flex;
+    gap: 8px;
+}
+
+.panel-actions button {
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 1.2rem;
+    transition: transform 0.2s;
+}
+
+.panel-actions button:hover {
+    transform: scale(1.1);
+}

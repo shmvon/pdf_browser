@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PDF Browser</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+</head>
+
+<body>
+    <div class="app-container">
+
+        <!-- Left Hand Panel -->
+        <aside class="left-column">
+
+            <!-- Left-top: Chapter buttons in a column -->
+            <div class="chapters-container">
+                <h2>Rubrieken</h2>
+                <nav class="chapters-nav">
+                    <button class="chapter-btn active" data-chapter="document">Document</button>
+                    <button class="chapter-btn" data-chapter="fasering">Fasering</button>
+                    <button class="chapter-btn" data-chapter="taken">Taken</button>
+                    <button class="chapter-btn" data-chapter="budget">Budget</button>
+                    <button class="chapter-btn" data-chapter="expertise">Expertise</button>
+                </nav>
+            </div>
+
+            <!-- Left-bottom: Folder selection and list of documents -->
+            <div class="files-container" id="drop-zone">
+                <div class="panel-header">
+                    <h2>Documenten</h2>
+                    <div class="panel-actions">
+                        <button id="open-folder-btn" title="Open Folder">📁</button>
+                        <button id="refresh-files" title="Refresh">🔄</button>
+                    </div>
+                </div>
+                <div id="current-folder-display" class="folder-display"></div>
+                <ul id="file-list" class="file-list">
+                    <!-- File items will be injected here -->
+                </ul>
+            </div>
+
+        </aside>
+
+        <!-- Right Hand Panel -->
+        <main class="right-column">
+
+            <!-- Top right: Bookmarks -->
+            <header class="bookmarks-container">
+                <div class="bookmark-controls">
+                    <span class="bookmark-label"><span id="current-chapter-label">Document</span> bookmarks</span>
+                    <div class="bookmark-slot">
+                        <label>#1</label>
+                        <input type="text" id="bm-1" placeholder="0">
+                        <button class="go-btn" data-slot="1" title="Go to page">➔</button>
+                        <button class="save-btn" data-slot="1" title="Save">💾</button>
+                        <button class="erase-btn" data-slot="1" title="Erase">X</button>
+                        <button class="missing-btn" data-slot="1" title="Mark as Missing">🚫</button>
+                    </div>
+                    <div class="bookmark-slot">
+                        <label>#2</label>
+                        <input type="text" id="bm-2" placeholder="0">
+                        <button class="go-btn" data-slot="2" title="Go to page">➔</button>
+                        <button class="save-btn" data-slot="2" title="Save">💾</button>
+                        <button class="erase-btn" data-slot="2" title="Erase">X</button>
+                        <button class="missing-btn" data-slot="2" title="Mark as Missing">🚫</button>
+                    </div>
+                    <div class="bookmark-slot">
+                        <label>#3</label>
+                        <input type="text" id="bm-3" placeholder="0">
+                        <button class="go-btn" data-slot="3" title="Go to page">➔</button>
+                        <button class="save-btn" data-slot="3" title="Save">💾</button>
+                        <button class="erase-btn" data-slot="3" title="Erase">X</button>
+                        <button class="missing-btn" data-slot="3" title="Mark as Missing">🚫</button>
+                    </div>
+                </div>
+                <!-- Extra info/status -->
+                <div id="status-message" class="status-message"></div>
+            </header>
+
+            <!-- Bottom right: Viewer -->
+            <div class="viewer-container-wrapper">
+                <div class="viewer-container" id="viewer-container">
+                    <div class="empty-state">Select a PDF to view</div>
+                    <!-- Iframe injected by JS -->
+                </div>
+            </div>
+
+        </main>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+
+</html>
